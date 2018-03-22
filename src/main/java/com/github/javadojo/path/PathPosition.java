@@ -1,4 +1,8 @@
-package com.github.javadojo;
+package com.github.javadojo.path;
+
+import com.github.javadojo.Drawable;
+import com.github.javadojo.movement.MovingVector;
+import com.github.javadojo.position.Position;
 
 public class PathPosition implements Drawable {
     private final Position position;
@@ -27,7 +31,6 @@ public class PathPosition implements Drawable {
 
     public void changeDirection() {
         this.changedDirection = true;
-
     }
 
     public int x() {

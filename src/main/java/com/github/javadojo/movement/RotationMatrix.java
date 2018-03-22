@@ -1,4 +1,4 @@
-package com.github.javadojo;
+package com.github.javadojo.movement;
 
 public enum RotationMatrix {
     TURN_RIGHT(0,1,-1,0),

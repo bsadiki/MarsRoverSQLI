@@ -1,4 +1,10 @@
-package com.github.javadojo;
+package com.github.javadojo.path;
+
+import com.github.javadojo.Drawable;
+import com.github.javadojo.position.HeightComparator;
+import com.github.javadojo.movement.MovingVector;
+import com.github.javadojo.position.WidthComparator;
+import com.github.javadojo.position.Position;
 
 import static com.github.javadojo.MarsRover.LINE_SEPARATOR;
 

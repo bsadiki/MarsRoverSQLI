@@ -1,4 +1,6 @@
-package com.github.javadojo;
+package com.github.javadojo.position;
+
+import com.github.javadojo.movement.MovingVector;
 
 public class Position {
     private final int[] values;
@@ -20,7 +22,7 @@ public class Position {
     public String toString() {
         return this.values[0] + "," + this.values[1];
     }
-    int [] distanceFromOtherPosition(Position position){
+    public int [] distanceFromOtherPosition(Position position){
         int hDiff = this.values[0] - position.values[0] ;
         int vDiff = this.values[1] - position.values[1] ;
         return new int[]{Math.abs(hDiff)+1,Math.abs(vDiff)+1};

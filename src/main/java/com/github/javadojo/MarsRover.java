@@ -1,5 +1,10 @@
 package com.github.javadojo;
 
+import com.github.javadojo.movement.MovingVector;
+import com.github.javadojo.movement.RotationMatrix;
+import com.github.javadojo.path.Path;
+import com.github.javadojo.position.Position;
+
 public class MarsRover {
 
     public static final String LINE_SEPARATOR = "\n";

@@ -1,10 +1,10 @@
-package com.github.javadojo;
+package com.github.javadojo.movement;
 
 public class MovingVector {
 
     private final int[] vector;
 
-    MovingVector(int value1, int value2) {
+    public MovingVector(int value1, int value2) {
         this.vector = new int[]{value1, value2};
     }
 

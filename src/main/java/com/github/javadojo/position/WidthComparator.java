@@ -1,4 +1,6 @@
-package com.github.javadojo;
+package com.github.javadojo.position;
+
+import com.github.javadojo.path.PathPosition;
 
 import java.util.Comparator;
 
