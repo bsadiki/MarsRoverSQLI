@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Path implements Drawable {
-    private List<PathPosition> pathPositions;
+    private final List<PathPosition> pathPositions;
 
 
     public Path() {

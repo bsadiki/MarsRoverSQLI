@@ -5,7 +5,7 @@ public class MarsRover {
     public static final String LINE_SEPARATOR = "\n";
     private Position currentPosition;
     private MovingVector movingVector;
-    private Path path;
+    private final Path path;
 
     public MarsRover(String s) {
         this.currentPosition = new Position(0, 0);

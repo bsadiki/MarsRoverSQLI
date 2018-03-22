@@ -1,7 +1,7 @@
 package com.github.javadojo;
 
 public class Position {
-    private int[] values;
+    private final int[] values;
 
     public Position(int x, int y) {
         this.values = new int[]{x,y};

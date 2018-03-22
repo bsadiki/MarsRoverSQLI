@@ -1,8 +1,8 @@
 package com.github.javadojo;
 
-public class PathPosition implements Comparable<PathPosition>, Drawable {
-    private Position position;
-    private MovingVector movingVector;
+public class PathPosition implements Drawable {
+    private final Position position;
+    private final MovingVector movingVector;
     private boolean sample;
     private boolean changedDirection;
 
@@ -36,13 +36,6 @@ public class PathPosition implements Comparable<PathPosition>, Drawable {
 
     public int y() {
         return this.position.y();
-    }
-
-    @Override
-    public int compareTo(PathPosition otherPathPosition) {
-        if (Integer.compare(this.x(), otherPathPosition.x()) == 0)
-            return Integer.compare(this.y(), otherPathPosition.y());
-        else return Integer.compare(otherPathPosition.x(), this.x());
     }
 
 
