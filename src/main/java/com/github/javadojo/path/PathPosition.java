@@ -34,11 +34,11 @@ public class PathPosition implements Drawable {
     }
 
     public int x() {
-        return this.position.x();
+        return this.position.getX();
     }
 
     public int y() {
-        return this.position.y();
+        return this.position.getY();
     }
 
 

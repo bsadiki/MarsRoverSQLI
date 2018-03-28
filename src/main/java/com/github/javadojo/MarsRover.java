@@ -43,7 +43,7 @@ public class MarsRover {
     }
 
     public void addSamplePositionToPath() {
-        this.path.makeSamplePosition();
+        this.path.addSamplePosition();
     }
 
     private void addPositionToPath() {
