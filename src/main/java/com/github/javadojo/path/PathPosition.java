@@ -17,6 +17,13 @@ public class PathPosition implements Drawable {
         this.changedDirection = false;
     }
 
+    private PathPosition(Position position, MovingVector movingVector, boolean sample, boolean changedDirection) {
+        this.position = position;
+        this.movingVector = movingVector;
+        this.sample = sample;
+        this.changedDirection = changedDirection;
+    }
+
     private boolean isSample() {
         return sample;
     }
@@ -40,7 +47,9 @@ public class PathPosition implements Drawable {
     public int y() {
         return this.position.getY();
     }
-
+    public PathPosition reverse(){
+        return new PathPosition(this.position.reverse(),this.movingVector,this.sample,this.changedDirection);
+    }
 
     @Override
     public String draw() {
@@ -56,4 +65,5 @@ public class PathPosition implements Drawable {
     private Boolean isHorizontal() {
         return this.movingVector.isHorizontal();
     }
+
 }
