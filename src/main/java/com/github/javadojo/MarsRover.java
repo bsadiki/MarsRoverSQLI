@@ -3,6 +3,7 @@ package com.github.javadojo;
 import com.github.javadojo.movement.MovingVector;
 import com.github.javadojo.movement.RotationMatrix;
 import com.github.javadojo.path.Path;
+import com.github.javadojo.path.PathBuilder;
 import com.github.javadojo.position.Position;
 
 public class MarsRover {
@@ -15,7 +16,7 @@ public class MarsRover {
     public MarsRover(String s) {
         this.currentPosition = new Position(0, 0);
         this.movingVector = new MovingVector(1, 0);
-        this.path = new Path();
+        this.path = new PathBuilder().build();
         addPositionToPath();
         MovingParser.parse(s, this);
     }
