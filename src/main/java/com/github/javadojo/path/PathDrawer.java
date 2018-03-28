@@ -13,7 +13,7 @@ public class PathDrawer {
     String draw(List<PathPosition> pathPositions) {
         List<PathPosition> drawingPathPosition = convertToDrawing(pathPositions);
         String[][] drawingMatrix = initializeMatrix(drawingPathPosition);
-        int[] origin = getOrigin(drawingPathPosition);
+        Position origin = getOrigin(drawingPathPosition);
         addIntermediatePosition(drawingMatrix, origin, drawingPathPosition);
         addStartPoint(drawingMatrix, origin, drawingPathPosition);
         addCurrentPosition(drawingMatrix, origin, drawingPathPosition);
@@ -21,20 +21,21 @@ public class PathDrawer {
     }
 
     private List<PathPosition> convertToDrawing(List<PathPosition> pathPositions) {
-        List<PathPosition> drawingPathPosition = reverse(pathPositions);
-        return drawingPathPosition;
+        List<PathPosition> drawingPathPositions = reverse(pathPositions);
+
+        return drawingPathPositions;
     }
 
-    private List<PathPosition> reverse(List<PathPosition> pathPositions) {
+    private List<PathPosition> reverse(List<PathPosition> drawingPathPosition) {
         List<PathPosition> reversedPathPosition = new ArrayList<>();
-        pathPositions.forEach(pathPosition -> {
+        drawingPathPosition.forEach(pathPosition -> {
             reversedPathPosition.add(pathPosition.reverse()) ;
         });
         return reversedPathPosition;
     }
 
-    private String[][] initializeMatrix(List<PathPosition> pathPositions) {
-        int[] drawingMatrixDimension = firstAndLastPosition(pathPositions)[0].distanceFromOtherPosition(firstAndLastPosition(pathPositions)[1]);
+    private String[][] initializeMatrix(List<PathPosition> drawingPathPosition) {
+        int[] drawingMatrixDimension = firstAndLastPosition(drawingPathPosition)[0].distanceFromOtherPosition(firstAndLastPosition(drawingPathPosition)[1]);
         String[][] drawingMatrix = new String[drawingMatrixDimension[0]][drawingMatrixDimension[1]];
         for (int i = 0; i < drawingMatrix.length; i++) {
             for (int j = 0; j < drawingMatrix[i].length; j++) {
@@ -44,12 +45,12 @@ public class PathDrawer {
         return drawingMatrix;
     }
 
-    private int[] getOrigin(List<PathPosition> pathPositions) {
-        return new int[]{firstAndLastPosition(pathPositions)[0].getX(), firstAndLastPosition(pathPositions)[0].getY()};
+    private Position getOrigin(List<PathPosition> drawingPathPosition) {
+        return new Position(firstAndLastPosition(drawingPathPosition)[0]);
     }
 
-    private Position[] firstAndLastPosition(List<PathPosition> pathPositions) {
-        ArrayList<PathPosition> comparingList = new ArrayList<>(pathPositions);
+    private Position[] firstAndLastPosition(List<PathPosition> drawingPathPosition) {
+        ArrayList<PathPosition> comparingList = new ArrayList<>(drawingPathPosition);
         comparingList.sort(new WidthComparator());
         int minX = comparingList.get(0).x();
         int maxX = comparingList.get(comparingList.size() - 1).x();
@@ -59,11 +60,11 @@ public class PathDrawer {
         return new Position[]{new Position(maxX, minY), new Position(minX, maxY)};
     }
 
-    private void addIntermediatePosition(String[][] drawingMatrix, int[] origin, List<PathPosition> pathPositions) {
-        for (int i = 1; i < pathPositions.size() - 1; i++) {
-            PathPosition pathPosition = pathPositions.get(i);
-            int x = -(pathPosition.x() - origin[0]);
-            int y = pathPosition.y() - origin[1];
+    private void addIntermediatePosition(String[][] drawingMatrix, Position origin, List<PathPosition> drawingPathPosition) {
+        for (int i = 1; i < drawingPathPosition.size() - 1; i++) {
+            PathPosition pathPosition = drawingPathPosition.get(i);
+            int x = -(pathPosition.x() - origin.getX());
+            int y = pathPosition.y() - origin.getY();
             if (pathPosition.draw().equals("S"))
                 drawingMatrix[x][y] = pathPosition.draw();
             else {
@@ -78,15 +79,15 @@ public class PathDrawer {
         }
     }
 
-    private void addStartPoint(String[][] drawingMatrix, int[] origin, List<PathPosition> pathPositions) {
-        int xFirstPosition = -(pathPositions.get(0).x() - origin[0]);
-        int yFirstPosition = pathPositions.get(0).y() - origin[1];
+    private void addStartPoint(String[][] drawingMatrix, Position origin, List<PathPosition> drawingPathPosition) {
+        int xFirstPosition = -(drawingPathPosition.get(0).x() - origin.getX());
+        int yFirstPosition = drawingPathPosition.get(0).y() - origin.getY();
         drawingMatrix[xFirstPosition][yFirstPosition] = "X";
     }
 
-    private void addCurrentPosition(String[][] drawingMatrix, int[] origin, List<PathPosition> pathPositions) {
-        int xCurrentPosition = pathPositions.get(pathPositions.size() - 1).x() - origin[0];
-        int yCurrentPosition = pathPositions.get(pathPositions.size() - 1).y() - origin[1];
+    private void addCurrentPosition(String[][] drawingMatrix, Position origin, List<PathPosition> drawingPathPosition) {
+        int xCurrentPosition = drawingPathPosition.get(drawingPathPosition.size() - 1).x() - origin.getX();
+        int yCurrentPosition = drawingPathPosition.get(drawingPathPosition.size() - 1).y() - origin.getY();
         drawingMatrix[-xCurrentPosition][yCurrentPosition] = "*";
     }
 
