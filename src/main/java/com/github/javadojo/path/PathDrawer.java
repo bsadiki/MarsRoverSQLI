@@ -12,20 +12,25 @@ import static com.github.javadojo.MarsRover.LINE_SEPARATOR;
 public class PathDrawer {
     String draw(List<PathPosition> pathPositions) {
         List<PathPosition> drawingPathPosition = convertToDrawing(pathPositions);
-        String[][] drawingMatrix = initializeMatrix(pathPositions);
-        int[] origin = getOrigin(pathPositions);
-        addIntermediatePosition(drawingMatrix, origin, pathPositions);
-        addStartPoint(drawingMatrix, origin, pathPositions);
-        addCurrentPosition(drawingMatrix, origin, pathPositions);
+        String[][] drawingMatrix = initializeMatrix(drawingPathPosition);
+        int[] origin = getOrigin(drawingPathPosition);
+        addIntermediatePosition(drawingMatrix, origin, drawingPathPosition);
+        addStartPoint(drawingMatrix, origin, drawingPathPosition);
+        addCurrentPosition(drawingMatrix, origin, drawingPathPosition);
         return drawMatrix(drawingMatrix);
     }
 
     private List<PathPosition> convertToDrawing(List<PathPosition> pathPositions) {
-        List<PathPosition> drawingPathPosition = new ArrayList<>();
-        pathPositions.forEach(pathPosition -> {
-            drawingPathPosition.add(pathPosition.reverse()) ;
-        });
+        List<PathPosition> drawingPathPosition = reverse(pathPositions);
         return drawingPathPosition;
+    }
+
+    private List<PathPosition> reverse(List<PathPosition> pathPositions) {
+        List<PathPosition> reversedPathPosition = new ArrayList<>();
+        pathPositions.forEach(pathPosition -> {
+            reversedPathPosition.add(pathPosition.reverse()) ;
+        });
+        return reversedPathPosition;
     }
 
     private String[][] initializeMatrix(List<PathPosition> pathPositions) {

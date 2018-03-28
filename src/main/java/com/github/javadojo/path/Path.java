@@ -17,7 +17,7 @@ public class Path implements Drawable {
     }
 
     public void addPosition(Position position, MovingVector movingVector) {
-        this.pathPositions.add(new PathPosition(position.reverse(), movingVector));
+        this.pathPositions.add(new PathPosition(new Position(position), movingVector));
     }
 
     public void addSamplePosition() {
