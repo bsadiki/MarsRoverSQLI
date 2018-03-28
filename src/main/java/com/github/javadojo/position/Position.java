@@ -38,4 +38,9 @@ public class Position {
     public Position reverse(){
         return new Position(this.y,this.x);
     }
+
+    public void adjustToOrigin(Position origin) {
+         x = -(x - origin.x);
+         y = y - origin.y;
+    }
 }

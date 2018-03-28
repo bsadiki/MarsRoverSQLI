@@ -66,4 +66,7 @@ public class PathPosition implements Drawable {
         return this.movingVector.isHorizontal();
     }
 
+    public void adjustToOrigin(Position origin) {
+        this.position.adjustToOrigin(origin);
+    }
 }
