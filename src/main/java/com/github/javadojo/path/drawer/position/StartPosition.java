@@ -1,17 +1,19 @@
 package com.github.javadojo.path.drawer.position;
 
-import static com.github.javadojo.config.Configuration.CURRENT_POSITION;
 import static com.github.javadojo.config.Configuration.START_POINT;
 
 public class StartPosition extends DrawerPosition {
-    protected StartPosition() {
+    private static StartPosition ourInstance = new StartPosition();
+
+    public static StartPosition getInstance() {
+        return ourInstance;
+    }
+    private StartPosition() {
         super(8);
     }
 
     @Override
-    public String draw(String newContent) {
-        if(newContent.equals(CURRENT_POSITION))
-            return newContent;
+    public String draw() {
         return START_POINT;
     }
 }

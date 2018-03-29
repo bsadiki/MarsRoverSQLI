@@ -41,11 +41,11 @@ public class PathPosition {
         this.changedDirection = true;
     }
 
-    public int x() {
+    public int getX() {
         return this.position.getX();
     }
 
-    public int y() {
+    public int getY() {
         return this.position.getY();
     }
 
@@ -54,9 +54,9 @@ public class PathPosition {
     }
 
     public String draw(int index, int listSize) {
-        if (index==0)
+        if (index == 0)
             return START_POINT;
-        if (index == listSize-1)
+        if (index == listSize - 1)
             return CURRENT_POSITION;
         if (isSample())
             return SAMPLE;

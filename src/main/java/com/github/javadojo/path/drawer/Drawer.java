@@ -1,7 +1,8 @@
 package com.github.javadojo.path.drawer;
 
 import com.github.javadojo.path.PathPosition;
-import com.github.javadojo.path.drawer.position.DrawerPostionFactory;
+import com.github.javadojo.path.drawer.position.DrawerPosition;
+import com.github.javadojo.path.drawer.position.DrawerPositionFactory;
 import com.github.javadojo.position.PositionSorter;
 
 import java.util.Arrays;
@@ -14,12 +15,12 @@ public class Drawer {
     private final PositionSorter positionSorter;
     private String[][] drawingMatrix;
     private final MatrixDrawer matrixDrawer;
-    private final DrawerPostionFactory drawerPostionFactory;
+    private final DrawerPositionFactory drawerPositionFactory;
 
-    public Drawer(PositionSorter positionSorter, MatrixDrawer matrixDrawer, DrawerPostionFactory drawerPostionFactory) {
+    public Drawer(PositionSorter positionSorter, MatrixDrawer matrixDrawer, DrawerPositionFactory drawerPositionFactory) {
         this.positionSorter = positionSorter;
         this.matrixDrawer = matrixDrawer;
-        this.drawerPostionFactory = drawerPostionFactory;
+        this.drawerPositionFactory = drawerPositionFactory;
     }
 
     public String draw(List<PathPosition> drawingPathPosition) {
@@ -42,9 +43,10 @@ public class Drawer {
 
     private void addIntermediatePosition(List<PathPosition> drawingPathPosition) {
         for (PathPosition pathPosition : drawingPathPosition) {
-
-            drawingMatrix[pathPosition.x()][pathPosition.y()] = drawerPostionFactory.createDrawerPosition(drawingMatrix[pathPosition.x()][pathPosition.y()]).draw(pathPosition.draw(drawingPathPosition.indexOf(pathPosition), drawingPathPosition.size()));
-
+            DrawerPosition currentDrawerPosition = drawerPositionFactory.createDrawerPosition(drawingMatrix[pathPosition.getX()][pathPosition.getY()]);
+            DrawerPosition newDrawerPosition = drawerPositionFactory.createDrawerPosition(pathPosition.draw(drawingPathPosition.indexOf(pathPosition), drawingPathPosition.size()));
+            DrawerPosition overrideDrawerPosition = currentDrawerPosition.overridePosition(newDrawerPosition);
+            drawingMatrix[pathPosition.getX()][pathPosition.getY()] = overrideDrawerPosition.draw();
         }
     }
 

@@ -7,5 +7,11 @@ public abstract class DrawerPosition {
         this.priority = priority;
     }
 
-    public abstract String draw(String newContent);
+    public DrawerPosition overridePosition(DrawerPosition newDrawerPosition){
+        if (this.priority<newDrawerPosition.priority)
+            return newDrawerPosition;
+        else return this;
+    }
+
+    public abstract String draw();
 }
