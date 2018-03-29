@@ -31,7 +31,7 @@ public class Path implements Drawable {
 
     @Override
     public String draw() {
-        List<PathPosition> drawingPathPosition = pathListConverter.convertToDrawable(pathPositions);
-        return this.drawer.draw(drawingPathPosition);
+        List<PathPosition> drawablePathPosition = pathListConverter.convertToDrawable(pathPositions);
+        return this.drawer.draw(drawablePathPosition);
     }
 }

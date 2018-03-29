@@ -1,10 +1,11 @@
 package com.github.javadojo.path;
 
-import com.github.javadojo.Drawable;
 import com.github.javadojo.movement.MovingVector;
 import com.github.javadojo.position.Position;
 
-public class PathPosition implements Drawable {
+import static com.github.javadojo.config.Configuration.*;
+
+public class PathPosition {
     private final Position position;
     private final MovingVector movingVector;
     private boolean sample;
@@ -32,7 +33,7 @@ public class PathPosition implements Drawable {
         this.sample = true;
     }
 
-    public boolean hasChangedDirection() {
+    private boolean hasChangedDirection() {
         return changedDirection;
     }
 
@@ -47,19 +48,23 @@ public class PathPosition implements Drawable {
     public int y() {
         return this.position.getY();
     }
-    public PathPosition reverse(){
-        return new PathPosition(this.position.reverse(),this.movingVector,this.sample,this.changedDirection);
+
+    public PathPosition reverse() {
+        return new PathPosition(this.position.reverse(), this.movingVector, this.sample, this.changedDirection);
     }
 
-    @Override
-    public String draw() {
+    public String draw(int index, int listSize) {
+        if (index==0)
+            return START_POINT;
+        if (index == listSize-1)
+            return CURRENT_POSITION;
         if (isSample())
-            return "S";
+            return SAMPLE;
         if (hasChangedDirection())
-            return "+";
+            return DOUBLE_CROSSED_PATH;
         if (isHorizontal())
-            return "-";
-        return "|";
+            return HORIZONTAL_PATH;
+        return VERTICAL_PATH;
     }
 
     private Boolean isHorizontal() {
